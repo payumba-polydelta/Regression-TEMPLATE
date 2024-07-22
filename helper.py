@@ -792,11 +792,11 @@ def display_model_evaluation_results(model_name: str, results: dict) -> None:
     Returns: None
     """
     display_markdown(md(f"### **Model: {model_name}**"))
-    display_markdown(md(f"* #### **Train MSE:** {results[model_name]["train_mse"]:.{NUM_DECIMAL_PLACES}f}"))
-    display_markdown(md(f"* #### **Test MSE:** {results[model_name]["test_mse"]:.{NUM_DECIMAL_PLACES}f}"))
-    display_markdown(md(f"* #### **Test MAE:** {results[model_name]["test_mae"]:.{NUM_DECIMAL_PLACES}f}"))
-    display_markdown(md(f"* #### **Test R^2:** {results[model_name]["test_r2"]:.{NUM_DECIMAL_PLACES}f}"))
-    display_markdown(md(f"* #### **Test Adjusted R^2:** {results[model_name]["test_adjusted_r2"]:.{NUM_DECIMAL_PLACES}f}"))
+    display_markdown(md(f"* #### **Train MSE:** {results[model_name]['train_mse']:.{NUM_DECIMAL_PLACES}f}"))
+    display_markdown(md(f"* #### **Test MSE:** {results[model_name]['test_mse']:.{NUM_DECIMAL_PLACES}f}"))
+    display_markdown(md(f"* #### **Test MAE:** {results[model_name]['test_mae']:.{NUM_DECIMAL_PLACES}f}"))
+    display_markdown(md(f"* #### **Test R^2:** {results[model_name]['test_r2']:.{NUM_DECIMAL_PLACES}f}"))
+    display_markdown(md(f"* #### **Test Adjusted R^2:** {results[model_name]['test_adjusted_r2']:.{NUM_DECIMAL_PLACES}f}"))
     
     if model_name in ['Linear', 'Lasso', 'Ridge']:
         display_markdown(md(f"### **Model Equation:**"))
