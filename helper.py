@@ -19,7 +19,6 @@ from sklearn.impute import SimpleImputer
 from sklearn.model_selection import KFold, GridSearchCV
 
 
-
 num_decimal_places = 7
 
 def load_data(file_name: str,
@@ -61,6 +60,31 @@ def load_data(file_name: str,
     df = df.drop(columns = dropped_columns)
     
     return df
+
+
+def get_number_of_unique_categories(df: pd.DataFrame, categorical_columns: list[str]) -> dict[str, int]:
+    """
+    Calculate the number of unique classes for each categorical column.
+
+    Args:
+        df (pd.DataFrame): The input DataFrame containing the data.
+        categorical_columns (list[str]): A list of column names representing categorical variables.
+
+    Returns:
+        dict[str, int]: A dictionary where keys are categorical column names and values are the number of unique classes.
+    """
+    num_unique_dict = {}
+    
+    display_text("Number of Unique Categories in Categorical Columns:", font_size = 20)
+    for column in categorical_columns:
+        if column in df.columns:
+            num_unique_dict[column] = df[column].nunique()
+            display_text(f"Number of Unique Categories in '{column}': {num_unique_dict[column]}")
+        else:
+            display_text(f"Warning: Column '{column}' not found in the DataFrame.")
+    
+    print()
+    return num_unique_dict
 
 
 def display_df(df: pd.DataFrame,
@@ -291,6 +315,7 @@ def visualize_outliers(df: pd.DataFrame,
 
 
 def train_and_evaluate_models(models_dictionary: dict[str, dict],
+                              num_features: int,
                               X_train: pd.DataFrame,
                               X_test: pd.DataFrame,
                               y_train: Union[pd.Series, np.ndarray],
@@ -335,7 +360,6 @@ def train_and_evaluate_models(models_dictionary: dict[str, dict],
             * 'coefficients': The coefficients of the model (for Linear, Lasso, and Ridge models only).
     """
     model_results: dict = {}
-    num_features: int = len(X_train.columns)
     
     for model_name, model_data in models_dictionary.items():
         display_text(f"Training and evaluating: {model_name}", font_size = 16, font_weight = 'bold')
