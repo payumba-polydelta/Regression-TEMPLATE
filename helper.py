@@ -19,7 +19,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.model_selection import KFold, GridSearchCV
 
 
-num_decimal_places = 7
+NUM_DECIMAL_PLACES = 7
 
 def load_data(file_name: str,
               dropped_columns: list[str],
@@ -389,11 +389,11 @@ def train_and_evaluate_models(models_dictionary: dict[str, dict],
         num_test_entries = len(y_test)
         test_adjusted_r2 = 1 - ((1 - test_r2) * (num_test_entries - 1) / (num_test_entries - num_features - 1))
         
-        display_markdown(md(f"* Test R-squared: {test_r2:.{num_decimal_places}f}"))
-        display_markdown(md(f"* Train MSE: {train_mse:.{num_decimal_places}f}"))
-        display_markdown(md(f"* Test MSE: {test_mse:.{num_decimal_places}f}"))
-        display_markdown(md(f"* Test MAE: {test_mae:.{num_decimal_places}f}"))
-        display_markdown(md(f"* Test Adjusted R^2: {test_adjusted_r2:.{num_decimal_places}f}"))
+        display_markdown(md(f"* Test R-squared: {test_r2:.{NUM_DECIMAL_PLACES}f}"))
+        display_markdown(md(f"* Train MSE: {train_mse:.{NUM_DECIMAL_PLACES}f}"))
+        display_markdown(md(f"* Test MSE: {test_mse:.{NUM_DECIMAL_PLACES}f}"))
+        display_markdown(md(f"* Test MAE: {test_mae:.{NUM_DECIMAL_PLACES}f}"))
+        display_markdown(md(f"* Test Adjusted R^2: {test_adjusted_r2:.{NUM_DECIMAL_PLACES}f}"))
         
         model_results[model_name] = {
             'best_model': best_model,
@@ -773,7 +773,7 @@ def plot_actual_vs_predicted_comparison(model_results: dict[str, dict],
 def create_fit_function_equation_markdown(intercept: int,
                                           coefficient_list: list,
                                           feature_list: list,
-                                          num_decimal_places: int = num_decimal_places) -> str:
+                                          num_decimal_places: int = NUM_DECIMAL_PLACES) -> str:
     model_equation = f"### {num_decimal_places} = {intercept:.{num_decimal_places}f}"
     
     for i in range(len(coefficient_list)):
@@ -792,11 +792,11 @@ def display_model_evaluation_results(model_name: str, results: dict) -> None:
     Returns: None
     """
     display_markdown(md(f"### **Model: {model_name}**"))
-    display_markdown(md(f"* #### **Train MSE:** {results[model_name]["train_mse"]:.{num_decimal_places}f}"))
-    display_markdown(md(f"* #### **Test MSE:** {results[model_name]["test_mse"]:.{num_decimal_places}f}"))
-    display_markdown(md(f"* #### **Test MAE:** {results[model_name]["test_mae"]:.{num_decimal_places}f}"))
-    display_markdown(md(f"* #### **Test R^2:** {results[model_name]["test_r2"]:.{num_decimal_places}f}"))
-    display_markdown(md(f"* #### **Test Adjusted R^2:** {results[model_name]["test_adjusted_r2"]:.{num_decimal_places}f}"))
+    display_markdown(md(f"* #### **Train MSE:** {results[model_name]["train_mse"]:.{NUM_DECIMAL_PLACES}f}"))
+    display_markdown(md(f"* #### **Test MSE:** {results[model_name]["test_mse"]:.{NUM_DECIMAL_PLACES}f}"))
+    display_markdown(md(f"* #### **Test MAE:** {results[model_name]["test_mae"]:.{NUM_DECIMAL_PLACES}f}"))
+    display_markdown(md(f"* #### **Test R^2:** {results[model_name]["test_r2"]:.{NUM_DECIMAL_PLACES}f}"))
+    display_markdown(md(f"* #### **Test Adjusted R^2:** {results[model_name]["test_adjusted_r2"]:.{NUM_DECIMAL_PLACES}f}"))
     
     if model_name in ['Linear', 'Lasso', 'Ridge']:
         display_markdown(md(f"### **Model Equation:**"))
@@ -807,7 +807,7 @@ def plot_residuals_histogram(model_name: str, residuals: np.ndarray) -> None:
     """
     Display a histogram of residuals with KDE and statistics.
     
-    Args:===
+    Args:
         residuals (np.ndarray): Residuals (actual - predicted)
         model_name (str): Name of the model
     Returns:
