@@ -917,7 +917,7 @@ def display_model_evaluation_and_plots(model_name: str,
                                        model_results: dict[str, dict],
                                        y_test: np.ndarray) -> None:
     """
-    Display the evaluation results and plots for a given model.
+    Display the evaluation results and plots for a given model by calling previous defined functions.
     
     Args:
         model_name (str): Name of the model
